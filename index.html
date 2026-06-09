@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║     PANADERÍA SAGRADO CORAZÓN DE JESÚS D&L                  ║
+  ║     Marketing Panificadora — IEDP                           ║
+  ╠══════════════════════════════════════════════════════════════╣
+  ║  ESTRUCTURA DE CARPETAS EN GITHUB:                          ║
+  ║                                                              ║
+  ║  MARKETING-PANIFICADORA/                                     ║
+  ║  ├── index.html               ← este archivo               ║
+  ║  ├── img/                                                    ║
+  ║  │   └── logo.png             ← logo de la panadería        ║
+  ║  ├── galeria/                                                ║
+  ║  │   ├── galeria.json         ← lista de fotos de productos ║
+  ║  │   └── (fotos JPG/PNG)                                     ║
+  ║  ├── videos/                                                 ║
+  ║  │   └── videos.json          ← videos de redes sociales    ║
+  ║  ├── menu/                                                   ║
+  ║  │   └── menu.json            ← carta de productos y precios║
+  ║  ├── equipo/                                                 ║
+  ║  │   ├── equipo.json          ← misión, visión e integrantes║
+  ║  │   └── (fotos del equipo)                                  ║
+  ║  └── redes/                                                  ║
+  ║      └── redes.json           ← redes sociales              ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panadería Sagrado Corazón de Jesús D&L 🍞</title>
+  <meta name="description" content="Panadería Sagrado Corazón de Jesús D&L — Pan artesanal hecho con amor. Proyecto de marketing estudiantil IEDP." />
+
+  <!--
+    FUENTES:
+    - Nunito: redondeada, suave y tierna — perfecta para este estilo kawaii
+    - Playfair Display: elegante para los títulos principales
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       VARIABLES GLOBALES
+       Paleta kawaii extraída del logo: rosas suaves, crema cálida
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      /* Rosa del logo: del más suave al más oscuro */
+      --rosa-palido:    #fff0f3;   /* Fondo principal, casi blanco rosado */
+      --rosa-suave:     #ffd6e0;   /* Rosa claro — fondos de tarjetas */
+      --rosa-medio:     #ffb3c6;   /* Rosa medio — bordes y detalles */
+      --rosa-fuerte:    #ff8fab;   /* Rosa fuerte — acentos principales */
+      --rosa-oscuro:    #c9465a;   /* Rosa oscuro — texto sobre rosa */
+
+      /* Tonos cálidos complementarios */
+      --crema:          #fff8f0;   /* Crema pan recién horneado */
+      --durazno:        #ffcba4;   /* Durazno cálido */
+      --durazno-suave:  #fff0e6;   /* Durazno muy pálido */
+      --caramelo:       #c87941;   /* Caramelo — detalles cálidos */
+      --marron-suave:   #8b5e3c;   /* Marrón pan */
+
+      /* Texto */
+      --texto-oscuro:   #3d1f2e;   /* Ciruela oscuro — texto principal */
+      --texto-medio:    #7a4a5e;   /* Rosa oscuro — texto secundario */
+      --texto-suave:    #b07a8e;   /* Rosa grisáceo — texto terciario */
+      --blanco:         #ffffff;
+
+      /* Formas */
+      --radio-sm:   8px;
+      --radio-md:   16px;
+      --radio-lg:   24px;
+      --radio-xl:   40px;
+      --radio-pill: 100px;
+
+      /* Sombras rosadas */
+      --sombra-suave:  0 4px 20px rgba(255, 143, 171, 0.15);
+      --sombra-media:  0 8px 32px rgba(255, 143, 171, 0.25);
+      --sombra-fuerte: 0 16px 48px rgba(255, 143, 171, 0.35);
+    }
+
+    /* Reset */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--rosa-palido);
+      color: var(--texto-oscuro);
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ELEMENTOS DECORATIVOS FLOTANTES
+       Pequeños emojis/shapes que dan el toque kawaii al fondo
+       ═══════════════════════════════════════════════════════════ */
+    /* Estos no interfieren con el contenido (pointer-events: none) */
+    .deco-flotante {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.06;
+      font-size: 5rem;
+      user-select: none;
+      animation: flotar 8s ease-in-out infinite;
+    }
+
+    /* Posiciones de los decorativos flotantes */
+    .deco-1 { top: 10%;  left: 2%;   animation-delay: 0s;   font-size: 4rem; }
+    .deco-2 { top: 40%;  right: 3%;  animation-delay: 2s;   font-size: 3rem; }
+    .deco-3 { top: 70%;  left: 5%;   animation-delay: 4s;   font-size: 5rem; }
+    .deco-4 { top: 85%;  right: 5%;  animation-delay: 1s;   font-size: 3.5rem; }
+    .deco-5 { top: 25%;  left: 92%;  animation-delay: 3s;   font-size: 4rem; }
+
+    /* Animación suave de flotación hacia arriba y abajo */
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50%       { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       BARRA DE NAVEGACIÓN
+       Rosa con elementos redondeados y tiernos
+       ═══════════════════════════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 240, 243, 0.96);
+      backdrop-filter: blur(12px);
+      /* Borde inferior con degradado rosa */
+      border-bottom: 2px solid var(--rosa-suave);
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo en la nav */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    /* Imagen del logo */
+    .nav-logo img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2.5px solid var(--rosa-fuerte);
+      box-shadow: 0 2px 10px rgba(255,143,171,0.3);
+    }
+
+    /* Texto del logo */
+    .nav-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--rosa-oscuro);
+    }
+
+    /* Links de navegación */
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--texto-medio);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 6px 14px;
+      border-radius: var(--radio-pill);
+      transition: all 0.2s;
+    }
+
+    /* Al hacer hover el link se llena de rosa */
+    .nav-links a:hover {
+      background: var(--rosa-suave);
+      color: var(--rosa-oscuro);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO: PORTADA PRINCIPAL
+       Fondo crema con manchas de color rosa suave
+       ═══════════════════════════════════════════════════════════ -->
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      /* Degradado radial desde crema a rosa muy suave */
+      background: radial-gradient(ellipse at 30% 50%,
+          #ffe4ec 0%,
+          #fff0f3 40%,
+          #fff8f0 100%);
+    }
+
+    /* Círculo decorativo grande arriba derecha */
+    .hero-burbuja-1 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,179,198,0.2) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    /* Círculo decorativo abajo izquierda */
+    .hero-burbuja-2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,203,164,0.2) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    /* Contenido del hero */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    /* Logo grande con efecto de "sticker" tierno */
+    .hero-logo {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      object-fit: cover;
+      /* Múltiples capas: borde rosa, resplandor */
+      border: 5px solid var(--rosa-medio);
+      box-shadow:
+        0 0 0 10px rgba(255,179,198,0.2),
+        0 0 0 18px rgba(255,179,198,0.1),
+        var(--sombra-fuerte);
+      margin-bottom: 2rem;
+      animation: entradaLogo 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* cubic-bezier especial: efecto rebote al entrar */
+    }
+
+    /* Animación con rebote (spring) */
+    @keyframes entradaLogo {
+      from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    /* Etiqueta kawaii sobre el título */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--rosa-suave);
+      color: var(--rosa-oscuro);
+      padding: 6px 18px;
+      border-radius: var(--radio-pill);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Título principal */
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Parte en cursiva rosa del título */
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rosa-fuerte);
+    }
+
+    /* Nombre completo de la panadería */
+    .hero-nombre {
+      font-size: 1rem;
+      color: var(--texto-medio);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    /* Descripción suave */
+    .hero p.desc {
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Botones del hero */
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Botón principal rosado sólido */
+    .btn-rosa {
+      background: linear-gradient(135deg, var(--rosa-fuerte), var(--rosa-medio));
+      color: var(--blanco);
+      padding: 13px 28px;
+      border-radius: var(--radio-pill);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      box-shadow: var(--sombra-media);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-rosa:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--sombra-fuerte);
+    }
+
+    /* Botón secundario suave */
+    .btn-suave {
+      background: var(--blanco);
+      color: var(--rosa-oscuro);
+      border: 2px solid var(--rosa-medio);
+      padding: 13px 28px;
+      border-radius: var(--radio-pill);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: background 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-suave:hover {
+      background: var(--rosa-suave);
+      border-color: var(--rosa-fuerte);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       DIVISOR KAWAII
+       Línea decorativa con emojis centrados
+       ═══════════════════════════════════════════════════════════ */
+    .divisor-kawaii {
+      text-align: center;
+      padding: 0.75rem 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.8rem;
+      color: var(--rosa-medio);
+      line-height: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LAYOUT GENERAL
+       ═══════════════════════════════════════════════════════════ */
+    .contenedor {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .seccion {
+      padding: 5rem 0;
+    }
+
+    .seccion-crema {
+      background: var(--crema);
+    }
+
+    .seccion-rosa-suave {
+      background: linear-gradient(180deg, #fff0f3 0%, #fff8f5 100%);
+    }
+
+    /* Encabezado de sección */
+    .seccion-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Badge de eyebrow de sección */
+    .seccion-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--rosa-suave);
+      color: var(--rosa-oscuro);
+      padding: 5px 16px;
+      border-radius: var(--radio-pill);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    /* Título de sección */
+    .seccion-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      line-height: 1.2;
+    }
+
+    /* Línea decorativa debajo del título de sección */
+    .seccion-header h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rosa-fuerte), var(--rosa-suave));
+      border-radius: 2px;
+      margin: 0.75rem auto 0;
+    }
+
+    /* Subtítulo de sección */
+    .seccion-header p {
+      color: var(--texto-suave);
+      max-width: 480px;
+      margin: 1rem auto 0;
+      font-size: 0.95rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MISIÓN Y VISIÓN
+       ═══════════════════════════════════════════════════════════ */
+    .mision-vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .mv-card {
+      background: var(--blanco);
+      border: 2px solid var(--rosa-suave);
+      border-radius: var(--radio-lg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+    }
+
+    /* Forma decorativa en la esquina superior derecha */
+    .mv-card::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--rosa-suave);
+      opacity: 0.4;
+    }
+
+    .mv-icon {
+      font-size: 2.8rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .mv-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--rosa-oscuro);
+      margin-bottom: 1rem;
+    }
+
+    .mv-card p {
+      color: var(--texto-medio);
+      font-weight: 400;
+      line-height: 1.8;
+      position: relative; /* Para quedar encima del círculo decorativo */
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       GALERÍA DE PRODUCTOS
+       ═══════════════════════════════════════════════════════════ */
+    #galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .foto-card {
+      background: var(--blanco);
+      border: 2px solid var(--rosa-suave);
+      border-radius: var(--radio-lg);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--sombra-suave);
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.3s;
+      /* cubic-bezier: efecto rebote suave al hacer hover */
+    }
+
+    /* Efecto rebote kawaii al hacer hover */
+    .foto-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: var(--sombra-media);
+    }
+
+    .foto-thumb {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--rosa-suave);
+      position: relative;
+    }
+
+    .foto-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .foto-card:hover .foto-thumb img {
+      transform: scale(1.08);
+    }
+
+    /* Corazón que aparece al hover */
+    .foto-thumb::after {
+      content: '🤍';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .foto-card:hover .foto-thumb::after {
+      opacity: 1;
+    }
+
+    .foto-info {
+      padding: 14px 16px;
+    }
+
+    .foto-nombre {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .foto-desc {
+      font-size: 0.78rem;
+      color: var(--texto-suave);
+      margin-top: 3px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MENÚ / CARTA DE PRODUCTOS
+       ═══════════════════════════════════════════════════════════ */
+    #menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-card {
+      background: var(--blanco);
+      border: 2px solid var(--rosa-suave);
+      border-radius: var(--radio-lg);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra-media);
+    }
+
+    /* Imagen del producto */
+    .menu-img {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--rosa-suave), var(--durazno-suave));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .menu-card:hover .menu-img img {
+      transform: scale(1.06);
+    }
+
+    .menu-img .placeholder-icono {
+      font-size: 3.5rem;
+    }
+
+    .menu-info {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .menu-categoria {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rosa-fuerte);
+      font-weight: 800;
+    }
+
+    .menu-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      line-height: 1.2;
+    }
+
+    .menu-desc {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      font-weight: 400;
+      flex: 1;
+    }
+
+    .menu-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1.5px solid var(--rosa-suave);
+      margin-top: 4px;
+    }
+
+    .menu-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--rosa-oscuro);
+    }
+
+    .menu-badge {
+      background: var(--rosa-suave);
+      color: var(--rosa-oscuro);
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: var(--radio-pill);
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       VIDEOS DE REDES SOCIALES
+       ═══════════════════════════════════════════════════════════ */
+    #videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .video-card {
+      background: var(--blanco);
+      border: 2px solid var(--rosa-suave);
+      border-radius: var(--radio-lg);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      transition: box-shadow 0.3s;
+    }
+
+    .video-card:hover {
+      box-shadow: var(--sombra-media);
+    }
+
+    /* Contenedor del iframe 16:9 */
+    .video-wrap {
+      aspect-ratio: 16 / 9;
+      background: var(--texto-oscuro);
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .video-info {
+      padding: 1.25rem;
+    }
+
+    .video-red {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rosa-fuerte);
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .video-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      line-height: 1.3;
+      margin-bottom: 5px;
+    }
+
+    .video-desc {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       QUIÉNES SOMOS — EQUIPO (solo 2 integrantes)
+       ═══════════════════════════════════════════════════════════ */
+    #equipo-grid {
+      display: grid;
+      /* Máximo 2 columnas centradas para 2 integrantes */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .miembro-card {
+      background: var(--blanco);
+      border: 2px solid var(--rosa-suave);
+      border-radius: var(--radio-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--sombra-suave);
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decoración kawaii de fondo en la tarjeta */
+    .miembro-card::before {
+      content: '🍞';
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      font-size: 5rem;
+      opacity: 0.05;
+      transform: rotate(-20deg);
+    }
+
+    .miembro-card:hover {
+      transform: translateY(-6px) rotate(1deg);
+    }
+
+    .miembro-foto {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      /* Borde rosado grueso estilo sticker */
+      border: 4px solid var(--rosa-medio);
+      box-shadow:
+        0 0 0 6px var(--rosa-suave),
+        0 0 0 8px var(--rosa-medio);
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
+
+    .miembro-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--texto-oscuro);
+      margin-bottom: 4px;
+    }
+
+    .miembro-rol {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rosa-fuerte);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .miembro-desc {
+      font-size: 0.88rem;
+      color: var(--texto-medio);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       REDES SOCIALES
+       ═══════════════════════════════════════════════════════════ */
+    #redes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .red-card {
+      background: var(--blanco);
+      border: 2px solid var(--rosa-suave);
+      border-radius: var(--radio-lg);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: var(--sombra-suave);
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), border-color 0.2s;
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .red-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: var(--rosa-fuerte);
+    }
+
+    .red-icono { font-size: 2.5rem; }
+
+    .red-nombre {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--texto-medio);
+    }
+
+    .red-handle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--rosa-oscuro);
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SKELETONS DE CARGA
+       ═══════════════════════════════════════════════════════════ */
+    .skeleton {
+      background: linear-gradient(
+        90deg,
+        var(--rosa-suave) 25%,
+        var(--rosa-palido) 50%,
+        var(--rosa-suave) 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: var(--radio-md);
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Mensaje vacío */
+    .msg-vacio {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--texto-suave);
+    }
+
+    .msg-vacio .icono-grande {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .msg-vacio h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--texto-medio);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LIGHTBOX
+       ═══════════════════════════════════════════════════════════ */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(61, 31, 46, 0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #lightbox.activo { display: flex; }
+
+    #lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: var(--radio-lg);
+      box-shadow: 0 0 60px rgba(255,143,171,0.3);
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    #lightbox-close:hover { background: rgba(255,143,171,0.3); }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ */
+    footer {
+      background: var(--texto-oscuro);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Patrón de fondo del footer */
+    footer::before {
+      content: '🍞 🥐 🍩 🍪 🧁 🎀';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      opacity: 0.03;
+      white-space: nowrap;
+      letter-spacing: 2rem;
+    }
+
+    .footer-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--rosa-medio);
+      margin: 0 auto 1.5rem;
+      display: block;
+      opacity: 0.85;
+    }
+
+    .footer-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--rosa-medio);
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.35);
+      font-size: 0.82rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-tecnica {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { min-height: 75vh; padding: 3rem 1.5rem; }
+      .hero-logo { width: 140px; height: 140px; }
+      .contenedor { padding: 0 1rem; }
+      .seccion { padding: 3.5rem 0; }
+      .mision-vision-grid { grid-template-columns: 1fr; }
+      #videos-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Elementos kawaii flotantes de fondo -->
+  <!-- Son decorativos, no interfieren con el contenido -->
+  <div class="deco-flotante deco-1">🍞</div>
+  <div class="deco-flotante deco-2">🎀</div>
+  <div class="deco-flotante deco-3">🥐</div>
+  <div class="deco-flotante deco-4">🍩</div>
+  <div class="deco-flotante deco-5">🧁</div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BARRA DE NAVEGACIÓN
+       ═══════════════════════════════════════════════════════════ -->
+  <nav>
+    <a class="nav-logo" href="#inicio">
+      <!-- ARCHIVO: img/logo.png — el logo de la panadería -->
+      <img src="img/logo.png" alt="Panadería Sagrado Corazón" />
+      <span>Panadería SCJ D&L</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#menu">Carta</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#nosotros">Nosotras</a></li>
+      <li><a href="#redes">Redes</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero-burbuja-1"></div>
+    <div class="hero-burbuja-2"></div>
+
+    <div class="hero-content">
+      <!-- Logo grande kawaii -->
+      <img class="hero-logo" src="img/logo.png" alt="Panadería Sagrado Corazón de Jesús D&L" />
+
+      <!-- Etiqueta superior -->
+      <div class="hero-eyebrow">🍞 Emprendimiento estudiantil · IEDP 🍞</div>
+
+      <!-- Título -->
+      <h1>Panadería<br><em>Sagrado Corazón</em></h1>
+      <p class="hero-nombre">de Jesús D&L ✨</p>
+
+      <!-- Descripción -->
+      <p class="desc">Pan artesanal hecho con amor, ingredientes seleccionados y mucha dedicación. ¡Cada bocado tiene sabor a hogar! 🏠💕</p>
+
+      <!-- Botones -->
+      <div class="hero-ctas">
+        <a class="btn-rosa" href="#menu">🥐 Ver carta</a>
+        <a class="btn-suave" href="#nosotras">💕 Conócenos</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor-kawaii">🎀 · 🍞 · 🎀</div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MISIÓN Y VISIÓN
+       Archivo: equipo/equipo.json
+       Campos: "mision", "vision"
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion seccion-crema" id="mision">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">🎯 Nuestra identidad</div>
+        <h2>Misión & Visión</h2>
+        <p>Lo que nos inspira y a dónde queremos llegar con nuestra panadería</p>
+      </div>
+      <div class="mision-vision-grid" id="mision-vision-contenido">
+        <div class="skeleton" style="height:220px"></div>
+        <div class="skeleton" style="height:220px"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor-kawaii">🍩 · 🧁 · 🍩</div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GALERÍA DE FOTOS
+       Archivo: galeria/galeria.json
+       Formato:
+       [
+         {
+           "nombre": "Pandebono recién horneado",
+           "descripcion": "De nuestro horno a tu mesa 🍞",
+           "archivo": "pandebono.jpg"
+         },
+         ...
+       ]
+       Las fotos deben estar en la carpeta galeria/
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion" id="galeria">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">📸 En imágenes</div>
+        <h2>Galería de Productos</h2>
+        <p>Una mirada a nuestros panes artesanales, todos hechos con amor 💕</p>
+      </div>
+      <div id="galeria-grid">
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CARTA DE PRODUCTOS / MENÚ
+       Archivo: menu/menu.json
+       Formato:
+       [
+         {
+           "nombre": "Pandebono",
+           "categoria": "Pan tradicional",
+           "descripcion": "Pandebono esponjoso, recién horneado, perfecto para el desayuno",
+           "precio": "$1.500",
+           "imagen": "pandebono.jpg",
+           "disponible": true
+         },
+         ...
+       ]
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion seccion-rosa-suave" id="menu">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">🥐 Nuestros precios</div>
+        <h2>Nuestra Carta</h2>
+        <p>Elige tu favorito — todos nuestros productos son artesanales 🌸</p>
+      </div>
+      <div id="menu-grid">
+        <div class="skeleton" style="height:320px"></div>
+        <div class="skeleton" style="height:320px"></div>
+        <div class="skeleton" style="height:320px"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor-kawaii">🌸 · 🍪 · 🌸</div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       VIDEOS DE REDES SOCIALES
+       Archivo: videos/videos.json
+       Formato:
+       [
+         {
+           "titulo": "Así hacemos nuestro pan 🍞",
+           "red": "YouTube",
+           "descripcion": "Video mostrando el proceso de elaboración de nuestro pan artesanal",
+           "youtube_id": "CODIGO_DEL_VIDEO"
+         },
+         ...
+       ]
+       El youtube_id está en la URL: youtube.com/watch?v=ESTE_CODIGO
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion seccion-crema" id="videos">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">🎬 Contenido digital</div>
+        <h2>Nuestros Videos</h2>
+        <p>Mira lo que publicamos en redes — ¡síguenos para más contenido! 💕</p>
+      </div>
+      <div id="videos-grid">
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       QUIÉNES SOMOS — EQUIPO (2 integrantes)
+       Archivo: equipo/equipo.json
+       Formato de integrantes:
+       [
+         {
+           "nombre": "Nombre Apellido",
+           "rol": "Repostera y fundadora",
+           "descripcion": "Texto sobre esta persona...",
+           "foto": "nombre.jpg"
+         }
+       ]
+       Las fotos van en la carpeta equipo/
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion" id="nosotros">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">💕 El equipo</div>
+        <h2>Quiénes Somos</h2>
+        <!-- El JS carga el texto del JSON aquí -->
+        <p id="sobre-nosotros-texto">Cargando...</p>
+      </div>
+      <div id="equipo-grid">
+        <div class="skeleton" style="height:300px"></div>
+        <div class="skeleton" style="height:300px"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       REDES SOCIALES
+       Archivo: redes/redes.json
+       Formato:
+       [
+         {
+           "red": "Instagram",
+           "icono": "📸",
+           "handle": "@panaderiasdj",
+           "url": "https://instagram.com/panaderiasdj"
+         },
+         ...
+       ]
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion seccion-rosa-suave" id="redes">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">📱 Síguenos</div>
+        <h2>Redes Sociales</h2>
+        <p>Encuéntranos, haz tu pedido y comparte nuestro contenido 🎀</p>
+      </div>
+      <div id="redes-grid">
+        <div class="skeleton" style="height:140px;width:160px;border-radius:var(--radio-lg)"></div>
+        <div class="skeleton" style="height:140px;width:160px;border-radius:var(--radio-lg)"></div>
+        <div class="skeleton" style="height:140px;width:160px;border-radius:var(--radio-lg)"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer>
+    <img class="footer-logo" src="img/logo.png" alt="Panadería SCJ D&L" />
+    <p class="footer-nombre">Panadería Sagrado Corazón de Jesús D&L</p>
+    <p style="margin-top:8px;">🍞 Pan artesanal hecho con amor · Cúcuta 🍞</p>
+    <p style="margin-top:6px;">Emprendimiento estudiantil · Institución Educativa La Divina Pastora</p>
+
+    <!-- Mención a la técnica académica -->
+    <div class="footer-tecnica">
+      <p>Proyecto académico desarrollado en la</p>
+      <p style="color:rgba(255,200,180,0.3); font-weight:700; letter-spacing:0.05em; margin-top:4px;">
+        TÉCNICA EN INTEGRACIÓN DE CONTENIDOS DIGITALES
+      </p>
+      <p style="margin-top:4px;">IEDP · Institución Educativa La Divina Pastora · Cúcuta, Norte de Santander</p>
+    </div>
+  </footer>
+
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button id="lightbox-close" onclick="cerrarLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="Foto ampliada" />
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       JAVASCRIPT
+       ═══════════════════════════════════════════════════════════ -->
+  <script>
+
+    /* Carga todo al cargar la página */
+    window.addEventListener('load', function () {
+      Promise.allSettled([
+        cargarEquipoYMision(),
+        cargarGaleria(),
+        cargarMenu(),
+        cargarVideos(),
+        cargarRedes()
+      ]);
+    });
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarEquipoYMision
+    Lee equipo/equipo.json → llena misión, visión, texto y equipo
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarEquipoYMision() {
+      try {
+        const resp = await fetch('equipo/equipo.json');
+        if (!resp.ok) throw new Error('equipo.json no encontrado');
+        const datos = await resp.json();
+
+        // Misión y visión
+        document.getElementById('mision-vision-contenido').innerHTML = `
+          <div class="mv-card">
+            <span class="mv-icon">🎯</span>
+            <h3>Nuestra Misión</h3>
+            <p>${datos.mision || 'Próximamente...'}</p>
+          </div>
+          <div class="mv-card">
+            <span class="mv-icon">🌸</span>
+            <h3>Nuestra Visión</h3>
+            <p>${datos.vision || 'Próximamente...'}</p>
+          </div>
+        `;
+
+        // Texto sobre nosotros
+        document.getElementById('sobre-nosotros-texto').textContent =
+          datos.sobre_nosotros || 'Somos dos estudiantes apasionadas por la panadería artesanal.';
+
+        // Tarjetas del equipo
+        const grid = document.getElementById('equipo-grid');
+        if (!datos.integrantes || datos.integrantes.length === 0) {
+          grid.innerHTML = mensajeVacio('👩‍🍳', 'Próximamente', 'Agrega integrantes en equipo/equipo.json');
+          return;
+        }
+
+        grid.innerHTML = datos.integrantes.map(p => `
+          <div class="miembro-card">
+            <img
+              class="miembro-foto"
+              src="equipo/${p.foto}"
+              alt="${escHtml(p.nombre)}"
+              onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=ffd6e0&color=c9465a&size=200'"
+            />
+            <div class="miembro-nombre">${escHtml(p.nombre)}</div>
+            <div class="miembro-rol">${escHtml(p.rol)}</div>
+            <p class="miembro-desc">${escHtml(p.descripcion)}</p>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        document.getElementById('mision-vision-contenido').innerHTML = `
+          <div class="mv-card"><span class="mv-icon">🎯</span><h3>Nuestra Misión</h3><p style="color:var(--texto-suave)">Agrega equipo/equipo.json</p></div>
+          <div class="mv-card"><span class="mv-icon">🌸</span><h3>Nuestra Visión</h3><p style="color:var(--texto-suave)">Agrega equipo/equipo.json</p></div>
+        `;
+        document.getElementById('sobre-nosotros-texto').textContent = 'Información próximamente.';
+        document.getElementById('equipo-grid').innerHTML = mensajeVacio('👩‍🍳', 'Agrega el equipo', 'Crea equipo/equipo.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarGaleria — Lee galeria/galeria.json
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarGaleria() {
+      const grid = document.getElementById('galeria-grid');
+      try {
+        const resp = await fetch('galeria/galeria.json');
+        if (!resp.ok) throw new Error('galeria.json no encontrado');
+        const fotos = await resp.json();
+
+        if (!fotos || fotos.length === 0) {
+          grid.innerHTML = mensajeVacio('📷', 'Sin fotos aún', 'Agrega fotos en galeria/galeria.json');
+          return;
+        }
+
+        grid.innerHTML = fotos.map(foto => `
+          <div class="foto-card" onclick="abrirLightbox('galeria/${foto.archivo}', '${escHtml(foto.nombre)}')">
+            <div class="foto-thumb">
+              <img src="galeria/${foto.archivo}" alt="${escHtml(foto.nombre)}" loading="lazy" />
+            </div>
+            <div class="foto-info">
+              <div class="foto-nombre">${escHtml(foto.nombre)}</div>
+              <div class="foto-desc">${escHtml(foto.descripcion || '')}</div>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        grid.innerHTML = mensajeVacio('📷', 'Sin fotos aún', 'Crea galeria/galeria.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarMenu — Lee menu/menu.json
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarMenu() {
+      const grid = document.getElementById('menu-grid');
+      try {
+        const resp = await fetch('menu/menu.json');
+        if (!resp.ok) throw new Error('menu.json no encontrado');
+        const productos = await resp.json();
+
+        if (!productos || productos.length === 0) {
+          grid.innerHTML = mensajeVacio('🥐', 'Carta vacía', 'Agrega productos en menu/menu.json');
+          return;
+        }
+
+        grid.innerHTML = productos.map(p => {
+          const imgHTML = p.imagen
+            ? `<img src="menu/${p.imagen}" alt="${escHtml(p.nombre)}" />`
+            : `<span class="placeholder-icono">🍞</span>`;
+
+          const badge = p.disponible !== false
+            ? '<span class="menu-badge">✓ Disponible</span>'
+            : '<span class="menu-badge" style="background:var(--durazno-suave);color:var(--caramelo)">Agotado</span>';
+
+          return `
+            <div class="menu-card">
+              <div class="menu-img">${imgHTML}</div>
+              <div class="menu-info">
+                <div class="menu-categoria">${escHtml(p.categoria || 'Pan artesanal')}</div>
+                <div class="menu-nombre">${escHtml(p.nombre)}</div>
+                <p class="menu-desc">${escHtml(p.descripcion || '')}</p>
+                <div class="menu-footer">
+                  <span class="menu-precio">${escHtml(p.precio)}</span>
+                  ${badge}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        grid.innerHTML = mensajeVacio('🥐', 'Carta próximamente', 'Crea menu/menu.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarVideos — Lee videos/videos.json
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarVideos() {
+      const grid = document.getElementById('videos-grid');
+      try {
+        const resp = await fetch('videos/videos.json');
+        if (!resp.ok) throw new Error('videos.json no encontrado');
+        const videos = await resp.json();
+
+        if (!videos || videos.length === 0) {
+          grid.innerHTML = mensajeVacio('🎬', 'Sin videos aún', 'Agrega videos en videos/videos.json');
+          return;
+        }
+
+        grid.innerHTML = videos.map(v => `
+          <div class="video-card">
+            <div class="video-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/${v.youtube_id}"
+                title="${escHtml(v.titulo)}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="video-info">
+              <div class="video-red">${v.icono || '🎬'} ${escHtml(v.red || 'Video')}</div>
+              <div class="video-titulo">${escHtml(v.titulo)}</div>
+              <p class="video-desc">${escHtml(v.descripcion || '')}</p>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        grid.innerHTML = mensajeVacio('🎬', 'Sin videos aún', 'Crea videos/videos.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarRedes — Lee redes/redes.json
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarRedes() {
+      const grid = document.getElementById('redes-grid');
+      try {
+        const resp = await fetch('redes/redes.json');
+        if (!resp.ok) throw new Error('redes.json no encontrado');
+        const redes = await resp.json();
+
+        if (!redes || redes.length === 0) {
+          grid.innerHTML = mensajeVacio('📱', 'Sin redes aún', 'Agrega redes en redes/redes.json');
+          return;
+        }
+
+        grid.innerHTML = redes.map(r => `
+          <a class="red-card" href="${r.url}" target="_blank" rel="noopener noreferrer">
+            <span class="red-icono">${r.icono || '🔗'}</span>
+            <span class="red-nombre">${escHtml(r.red)}</span>
+            <span class="red-handle">${escHtml(r.handle)}</span>
+          </a>
+        `).join('');
+
+      } catch (err) {
+        grid.innerHTML = mensajeVacio('📱', 'Sin redes aún', 'Crea redes/redes.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /* ═══ Lightbox ═════════════════════════════════════════════ */
+    function abrirLightbox(src, alt) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = alt;
+      document.getElementById('lightbox').classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarLightbox() {
+      document.getElementById('lightbox').classList.remove('activo');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function (e) {
+      if (e.target === this) cerrarLightbox();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') cerrarLightbox();
+    });
+
+
+    /* ═══ Auxiliares ════════════════════════════════════════════ */
+    function mensajeVacio(icono, titulo, desc) {
+      return `<div class="msg-vacio"><div class="icono-grande">${icono}</div><h3>${titulo}</h3><p>${desc}</p></div>`;
+    }
+
+    /* Sanitiza texto para evitar errores o inyecciones de HTML */
+    function escHtml(txt) {
+      if (typeof txt !== 'string') return '';
+      return txt
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+  </script>
+
+</body>
+</html>

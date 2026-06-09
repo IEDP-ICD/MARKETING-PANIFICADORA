@@ -18,5 +18,10 @@
     "nombre": "Pan dulce surtido",
     "descripcion": "Variedad de panes dulces para todos los gustos",
     "archivo": "pan-dulce.jpg"
+  },
+  {
+    "nombre": "Roscón de rosa",
+    "descripcion": "Este es el roscón",
+    "archivo": "roscon.jpeg"
   }
 ]

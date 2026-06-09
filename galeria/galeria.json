@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Pan de queso casero",
+    "descripcion": "Suave, esponjoso y con mucho queso 🧀",
+    "archivo": "pan-queso.jpg"
+  },
+  {
+    "nombre": "Pandebono tradicional",
+    "descripcion": "Receta tradicional colombiana, recién horneado",
+    "archivo": "pandebono.jpg"
+  },
+  {
+    "nombre": "Almojábanas",
+    "descripcion": "Crujientes por fuera, suaves por dentro 💕",
+    "archivo": "almojabanas.jpg"
+  },
+  {
+    "nombre": "Pan dulce surtido",
+    "descripcion": "Variedad de panes dulces para todos los gustos",
+    "archivo": "pan-dulce.jpg"
+  }
+]

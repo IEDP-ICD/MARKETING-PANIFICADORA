@@ -1,0 +1,26 @@
+[
+  {
+    "red": "Instagram",
+    "icono": "📸",
+    "handle": "@panaderiasdj",
+    "url": "https://instagram.com/panaderiasdj"
+  },
+  {
+    "red": "TikTok",
+    "icono": "🎵",
+    "handle": "@panaderiasdj",
+    "url": "https://tiktok.com/@panaderiasdj"
+  },
+  {
+    "red": "Facebook",
+    "icono": "📘",
+    "handle": "Panadería SCJ D&L",
+    "url": "https://facebook.com/panaderiasdj"
+  },
+  {
+    "red": "WhatsApp",
+    "icono": "💬",
+    "handle": "Pide aquí",
+    "url": "https://wa.me/573001234567"
+  }
+]

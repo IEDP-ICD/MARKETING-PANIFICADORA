@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "Pan de queso",
+    "categoria": "Pan tradicional",
+    "descripcion": "Pan de queso artesanal, suave y esponjoso. Perfecto para el desayuno o la merienda.",
+    "precio": "$1.500",
+    "imagen": "pan-queso.jpg",
+    "disponible": true
+  },
+  {
+    "nombre": "Pandebono",
+    "categoria": "Pan tradicional",
+    "descripcion": "Pandebono colombiano recién horneado, elaborado con almidón de yuca y queso costeño.",
+    "precio": "$1.000",
+    "imagen": "pandebono.jpg",
+    "disponible": true
+  },
+  {
+    "nombre": "Almojábana",
+    "categoria": "Pan tradicional",
+    "descripcion": "Almojábanas esponjosas con sabor a queso, ideales para acompañar el café.",
+    "precio": "$1.200",
+    "imagen": "almojabana.jpg",
+    "disponible": true
+  },
+  {
+    "nombre": "Docena de pan",
+    "categoria": "Combos",
+    "descripcion": "12 unidades de pan a elección. El combo perfecto para el desayuno familiar.",
+    "precio": "$12.000",
+    "imagen": "",
+    "disponible": true
+  }
+]

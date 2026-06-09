@@ -1,0 +1,19 @@
+{
+  "mision": "Ofrecer productos de panadería artesanal elaborados con ingredientes de calidad, entregando a nuestros clientes el sabor auténtico del pan casero, mientras desarrollamos habilidades de emprendimiento y marketing digital como estudiantes de la Institución Educativa La Divina Pastora.",
+  "vision": "Posicionarnos como una panadería estudiantil reconocida en nuestra comunidad por la calidad, frescura y amor puesto en cada producto, expandiendo nuestro alcance a través de canales digitales y construyendo una marca que trascienda el ámbito escolar.",
+  "sobre_nosotros": "Somos dos estudiantes de la IEDP unidas por el amor al pan artesanal y el emprendimiento. La Panadería Sagrado Corazón de Jesús D&L nació como un proyecto académico que se convirtió en un emprendimiento real, donde combinamos la tradición panadera con el marketing digital.",
+  "integrantes": [
+    {
+      "nombre": "Nombre Apellido",
+      "rol": "Panadera y fundadora",
+      "descripcion": "Encargada de la elaboración artesanal de todos los productos. Su pasión por la repostería y la panadería es el corazón del emprendimiento.",
+      "foto": "integrante1.jpg"
+    },
+    {
+      "nombre": "Nombre Apellido",
+      "rol": "Marketing y ventas",
+      "descripcion": "Responsable de la estrategia de marketing digital, redes sociales y la gestión de pedidos y clientes del emprendimiento.",
+      "foto": "integrante2.jpg"
+    }
+  ]
+}

@@ -198,7 +198,7 @@
     /* ═══════════════════════════════════════════════════════════
        HERO: PORTADA PRINCIPAL
        Fondo crema con manchas de color rosa suave
-       ═══════════════════════════════════════════════════════════ -->
+       ═══════════════════════════════════════════════════════════ */
     .hero {
       min-height: 88vh;
       display: flex;
@@ -757,6 +757,59 @@
       color: var(--texto-suave);
     }
 
+    /* Ficha de TikTok: sin iframe (TikTok no permite embeber vista previa),
+       así que es un enlace que lleva directo al video en TikTok */
+    .video-tiktok-link {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-tiktok-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-tiktok-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background: linear-gradient(135deg, #1c1c1e, #3a2a30);
+    }
+
+    .video-play-badge {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.15);
+      transition: background 0.3s;
+    }
+
+    .video-tiktok-link:hover .video-play-badge {
+      background: rgba(0,0,0,0.35);
+    }
+
+    .video-play-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--rosa-fuerte);
+      box-shadow: var(--sombra-media);
+    }
+
     /* ═══════════════════════════════════════════════════════════
        QUIÉNES SOMOS — EQUIPO (solo 2 integrantes)
        ═══════════════════════════════════════════════════════════ */
@@ -1078,7 +1131,7 @@
     <div class="hero-burbuja-1"></div>
     <div class="hero-burbuja-2"></div>
 
-    <div class="hero-content" style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <div class="hero-content">
       <!-- Logo grande kawaii -->
       <img class="hero-logo" src="img/logo.png" alt="Panadería Sagrado Corazón de Jesús D&L" />
 
@@ -1086,11 +1139,11 @@
       <div class="hero-eyebrow">🍞 Emprendimiento estudiantil · IEDP 🍞</div>
 
       <!-- Título -->
-      <h1 >Panadería<br><em>Sagrado Corazón</em></h1>
-      <p class="hero-nombre" style="display: flex; justify-content: center; flex-wrap: wrap;">de Jesús D&L ✨</p>
+      <h1>Panadería<br><em>Sagrado Corazón</em></h1>
+      <p class="hero-nombre">de Jesús D&L ✨</p>
 
       <!-- Descripción -->
-      <p class="desc" style="display: flex; justify-content: center; flex-wrap: wrap;">Pan artesanal hecho con amor, ingredientes seleccionados y mucha dedicación. ¡Cada bocado tiene sabor a hogar! 🏠💕</p>
+      <p class="desc">Pan artesanal hecho con amor, ingredientes seleccionados y mucha dedicación. ¡Cada bocado tiene sabor a hogar! 🏠💕</p>
 
       <!-- Botones -->
       <div class="hero-ctas">
@@ -1193,7 +1246,8 @@
   <!-- ═══════════════════════════════════════════════════════════
        VIDEOS DE REDES SOCIALES
        Archivo: videos/videos.json
-       Formato:
+       Formato (YouTube se incrusta con reproductor; TikTok se muestra
+       como ficha con enlace que abre el video en TikTok):
        [
          {
            "titulo": "Así hacemos nuestro pan 🍞",
@@ -1201,9 +1255,19 @@
            "descripcion": "Video mostrando el proceso de elaboración de nuestro pan artesanal",
            "youtube_id": "CODIGO_DEL_VIDEO"
          },
+         {
+           "titulo": "Detrás de cámaras en TikTok 🎀",
+           "red": "TikTok",
+           "descripcion": "Se usa solo si TikTok no responde; si responde, se reemplaza por la descripción real del video",
+           "tiktok_url": "https://www.tiktok.com/@usuario/video/CODIGO_DEL_VIDEO"
+         },
          ...
        ]
        El youtube_id está en la URL: youtube.com/watch?v=ESTE_CODIGO
+       El tiktok_url es la URL completa del video en TikTok. Al cargar la
+       página, el código consulta la API pública oEmbed de TikTok para
+       traer la miniatura y la descripción real del video; si TikTok no
+       responde (sin internet, video privado, etc.) se usa "descripcion".
        ═══════════════════════════════════════════════════════════ -->
   <section class="seccion seccion-crema" id="videos">
     <div class="contenedor">
@@ -1489,7 +1553,21 @@
           return;
         }
 
-        grid.innerHTML = videos.map(v => `
+        grid.innerHTML = videos.map((v, i) => v.tiktok_url ? `
+          <div class="video-card">
+            <div class="video-wrap">
+              <a class="video-tiktok-link" href="${escHtml(v.tiktok_url)}" target="_blank" rel="noopener noreferrer" aria-label="Ver en TikTok: ${escHtml(v.titulo)}">
+                <div class="video-tiktok-placeholder" id="tiktok-thumb-${i}">🎵</div>
+                <div class="video-play-badge"><span class="video-play-icon">▶</span></div>
+              </a>
+            </div>
+            <div class="video-info">
+              <div class="video-red">${v.icono || '🎵'} ${escHtml(v.red || 'TikTok')}</div>
+              <div class="video-titulo">${escHtml(v.titulo)}</div>
+              <p class="video-desc" id="tiktok-desc-${i}">${escHtml(v.descripcion || 'Toca la ficha para verlo en TikTok')}</p>
+            </div>
+          </div>
+        ` : `
           <div class="video-card">
             <div class="video-wrap">
               <iframe
@@ -1508,9 +1586,44 @@
           </div>
         `).join('');
 
+        // Fichas de TikTok: trae miniatura y descripción reales del video
+        videos.forEach((v, i) => {
+          if (v.tiktok_url) cargarDatosTikTok(v.tiktok_url, i);
+        });
+
       } catch (err) {
         grid.innerHTML = mensajeVacio('🎬', 'Sin videos aún', 'Crea videos/videos.json');
         console.warn(err.message);
+      }
+    }
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarDatosTikTok — Consulta la API pública oEmbed de
+    TikTok (sin necesidad de backend ni API key) para reemplazar el
+    ícono musical por la miniatura real del video y la descripción
+    manual por el texto real que el video tiene en TikTok. Si TikTok
+    no responde (sin internet, video privado o eliminado), la ficha
+    se queda tal cual quedó con los datos de videos.json.
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarDatosTikTok(tiktokUrl, i) {
+      try {
+        const resp = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(tiktokUrl)}`);
+        if (!resp.ok) throw new Error('oEmbed de TikTok no disponible');
+        const data = await resp.json();
+
+        const thumbEl = document.getElementById(`tiktok-thumb-${i}`);
+        if (thumbEl && data.thumbnail_url) {
+          thumbEl.outerHTML = `<img class="video-tiktok-thumb" id="tiktok-thumb-${i}" src="${data.thumbnail_url}" alt="${escHtml(data.title || 'Video de TikTok')}" loading="lazy" />`;
+        }
+
+        const descEl = document.getElementById(`tiktok-desc-${i}`);
+        if (descEl && data.title) {
+          descEl.textContent = data.title;
+        }
+      } catch (err) {
+        console.warn('No se pudo obtener la descripción de TikTok:', err.message);
       }
     }
 

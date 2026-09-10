@@ -12,5 +12,12 @@
     "icono": "🎬",
     "descripcion": "Tutorial completo para hacer pandebono colombiano en casa. ¡Con todos nuestros secretos!",
     "youtube_id": "PEGA_EL_ID_DEL_VIDEO_AQUI"
+  },
+  {
+    "titulo": "Detrás de cámaras en TikTok 🎀",
+    "red": "TikTok",
+    "icono": "🎵",
+    "descripcion": "Se usa solo si TikTok no responde; si responde, se reemplaza por la descripción real del video",
+    "tiktok_url": "https://www.tiktok.com/@usuario/video/PEGA_EL_ID_DEL_VIDEO_AQUI"
   }
 ]

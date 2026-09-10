@@ -1615,7 +1615,13 @@
 
         const thumbEl = document.getElementById(`tiktok-thumb-${i}`);
         if (thumbEl && data.thumbnail_url) {
-          thumbEl.outerHTML = `<img class="video-tiktok-thumb" id="tiktok-thumb-${i}" src="${data.thumbnail_url}" alt="${escHtml(data.title || 'Video de TikTok')}" loading="lazy" />`;
+          const img = document.createElement('img');
+          img.className = 'video-tiktok-thumb';
+          img.id = `tiktok-thumb-${i}`;
+          img.src = data.thumbnail_url;
+          img.alt = data.title || 'Video de TikTok';
+          img.loading = 'lazy';
+          thumbEl.replaceWith(img);
         }
 
         const descEl = document.getElementById(`tiktok-desc-${i}`);

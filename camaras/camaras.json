@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Sesión con croma",
+    "descripcion": "Fotografiando el pan con fondo verde para el contenido de redes",
+    "archivo": "camaras-1.jpg"
+  },
+  {
+    "nombre": "Preparando la toma",
+    "descripcion": "Ajustando el pan antes de la captura",
+    "archivo": "camaras-2.jpg"
+  },
+  {
+    "nombre": "Detrás del lente",
+    "descripcion": "El equipo grabando y fotografiando el proceso",
+    "archivo": "camaras-3.jpg"
+  },
+  {
+    "nombre": "Últimos ajustes",
+    "descripcion": "Retoques finales antes de la sesión de fotos",
+    "archivo": "camaras-4.jpg"
+  }
+]

@@ -1118,6 +1118,7 @@
       <li><a href="#galeria">Galería</a></li>
       <li><a href="#menu">Carta</a></li>
       <li><a href="#videos">Videos</a></li>
+      <li><a href="#camaras">Detrás de cámaras</a></li>
       <li><a href="#nosotros">Nosotras</a></li>
       <li><a href="#redes">Redes</a></li>
     </ul>
@@ -1298,6 +1299,38 @@
        ]
        Las fotos van en la carpeta equipo/
        ═══════════════════════════════════════════════════════════ -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DETRÁS DE CÁMARAS
+       Archivo: camaras/camaras.json
+       Formato:
+       [
+         {
+           "nombre": "Sesión con croma",
+           "descripcion": "Descripción de la foto",
+           "archivo": "camaras-1.jpg"
+         }
+       ]
+       Las fotos van en la carpeta camaras/
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion seccion-crema" id="camaras">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">🎬 Behind the scenes</div>
+        <h2>Detrás de Cámaras</h2>
+        <p>Así preparamos el contenido para nuestras redes 💕</p>
+      </div>
+      <div id="camaras-grid">
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+      </div>
+    </div>
+  </section>
+
+
   <section class="seccion" id="nosotros">
     <div class="contenedor">
       <div class="seccion-header">
@@ -1383,6 +1416,7 @@
         cargarGaleria(),
         cargarMenu(),
         cargarVideos(),
+        cargarCamaras(),
         cargarRedes()
       ]);
     });
@@ -1482,6 +1516,42 @@
 
       } catch (err) {
         grid.innerHTML = mensajeVacio('📷', 'Sin fotos aún', 'Crea galeria/galeria.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarCamaras — Lee camaras/camaras.json
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarCamaras() {
+      const grid = document.getElementById('camaras-grid');
+      try {
+        const resp = await fetch('camaras/camaras.json');
+        if (!resp.ok) throw new Error('camaras.json no encontrado');
+        const fotos = await resp.json();
+
+        if (!fotos || fotos.length === 0) {
+          grid.innerHTML = mensajeVacio('🎬', 'Sin fotos aún', 'Agrega fotos en camaras/camaras.json');
+          return;
+        }
+
+        grid.innerHTML = fotos.map(foto => `
+          <div class="foto-card" onclick="abrirLightbox('camaras/${foto.archivo}', '${escHtml(foto.nombre)}')">
+            <div class="foto-thumb">
+              <img src="camaras/${foto.archivo}" alt="${escHtml(foto.nombre)}" loading="lazy" />
+            </div>
+            <div class="foto-info">
+              <div class="foto-nombre">${escHtml(foto.nombre)}</div>
+              <div class="foto-desc">${escHtml(foto.descripcion || '')}</div>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        grid.innerHTML = mensajeVacio('🎬', 'Sin fotos aún', 'Crea camaras/camaras.json');
         console.warn(err.message);
       }
     }

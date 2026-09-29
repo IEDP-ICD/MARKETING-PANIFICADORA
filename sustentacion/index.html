@@ -498,6 +498,61 @@
     .producto-card .nombre { font-size: clamp(.95rem, 2vh, 1.15rem); font-weight: 800; color: var(--texto-oscuro); }
     .producto-card .desc { font-size: clamp(.8rem, 1.7vh, .95rem); color: var(--texto-suave); margin-top: 2px; }
 
+    /* Dos bloques de servicio lado a lado, incluso en móvil (para dejar sitio a los QR debajo) */
+    .servicios-qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.6rem, 1.8vw, 1.2rem); width: 100%; }
+    .servicios-qr-grid .servicio-bloque { height: 100%; }
+
+    /* Panel de códigos QR — tamaño grande para escanear en vivo */
+    .qr-panel { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: clamp(1.2rem, 3.4vw, 2.6rem); width: 100%; flex: 1 1 0; min-height: 0; }
+    .qr-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(.6rem, 1.6vh, 1rem); height: 100%; }
+    .qr-card img { width: auto; height: clamp(190px, 36vh, 340px); max-width: 92%; border-radius: var(--radio-md); box-shadow: var(--sombra-media); border: 3px solid var(--blanco); outline: 2px solid var(--rosa-suave); }
+    .qr-card span { font-weight: 800; font-size: clamp(1.1rem, 2.5vh, 1.45rem); line-height: 1.3; color: var(--texto-oscuro); text-align: center; max-width: 18rem; }
+
+    /* Paleta de colores y estilo */
+    .paleta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(.5rem, 1.4vw, .9rem); width: 100%; }
+    .paleta-chip { border-radius: var(--radio-lg); overflow: hidden; border: 2px solid var(--rosa-suave); box-shadow: var(--sombra-suave); display: flex; flex-direction: column; }
+    .paleta-chip .swatch { height: clamp(84px, 16vh, 140px); }
+    .paleta-chip .info { background: var(--blanco); padding: clamp(.5rem, 1.2vh, .8rem) clamp(.4rem, 1vw, .6rem); text-align: center; }
+    .paleta-chip .nombre { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1rem, 2.1vh, 1.25rem); color: var(--texto-oscuro); }
+    .paleta-chip .hex { font-size: clamp(.82rem, 1.6vh, .95rem); color: var(--texto-suave); font-family: monospace; margin-top: 3px; }
+    .fuentes-row { display: flex; gap: clamp(.8rem, 2vw, 1.5rem); justify-content: center; flex-wrap: wrap; }
+    .fuente-card { background: var(--blanco); border: 2px solid var(--rosa-suave); border-radius: var(--radio-lg); padding: clamp(.7rem, 1.9vh, 1.2rem) clamp(1.1rem, 2.6vw, 1.8rem); text-align: center; box-shadow: var(--sombra-suave); }
+    .fuente-card .muestra { font-size: clamp(1.7rem, 4vh, 2.6rem); margin-bottom: 3px; }
+    .fuente-card .muestra.display { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--rosa-oscuro); }
+    .fuente-card .muestra.cuerpo { font-family: 'Nunito', sans-serif; color: var(--texto-oscuro); font-weight: 400; }
+    .fuente-card .etiqueta-fuente { font-size: clamp(.85rem, 1.8vh, 1.02rem); color: var(--texto-suave); letter-spacing: .05em; text-transform: uppercase; }
+
+    /* Informe de costos y gastos */
+    .costos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(1.2rem, 2.6vw, 2.2rem); width: 100%; }
+    .costo-item { display: flex; justify-content: space-between; align-items: baseline; gap: .6rem; border-bottom: 1px solid var(--rosa-suave); padding: clamp(.28rem, .75vh, .5rem) 0; }
+    .costo-item .desc { font-size: clamp(.74rem, 1.5vh, .92rem); color: var(--texto-medio); line-height: 1.25; text-align: left; }
+    .costo-item .valor { font-size: clamp(.78rem, 1.55vh, .95rem); color: var(--texto-oscuro); font-weight: 800; white-space: nowrap; flex-shrink: 0; }
+    .costos-total {
+      display: flex; justify-content: space-between; align-items: center; width: 100%;
+      background: linear-gradient(135deg, rgba(255,143,171,.16), rgba(200,121,65,.12));
+      border: 2px solid var(--rosa-suave); border-radius: var(--radio-lg);
+      padding: clamp(.55rem, 1.5vh, .95rem) clamp(1rem, 2vw, 1.6rem); margin-top: clamp(.3rem, .9vh, .6rem);
+    }
+    .costos-total .etiqueta { font-size: clamp(.85rem, 1.8vh, 1.1rem); letter-spacing: .08em; text-transform: uppercase; font-weight: 800; color: var(--rosa-oscuro); }
+    .costos-total .monto { font-family: 'Playfair Display', serif; font-size: clamp(1.25rem, 2.9vh, 1.8rem); font-weight: 700; color: var(--texto-oscuro); }
+
+    /* Recursos: fotos reales detrás de cámaras */
+    .recursos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(.45rem, 1.2vh, .8rem); width: 100%; }
+    .recursos-grid .servicio-bloque { padding: clamp(.5rem, 1.3vh, .85rem) clamp(.6rem, 1.4vw, .95rem); gap: 4px; }
+    .recursos-grid .servicio-bloque .icono { width: clamp(32px, 5.2vh, 42px); height: clamp(32px, 5.2vh, 42px); font-size: clamp(1.02rem, 2.1vh, 1.3rem); }
+    .recursos-grid .servicio-bloque h3 { font-size: clamp(.9rem, 1.9vh, 1.1rem); margin-bottom: 0; }
+    .recursos-grid .servicio-bloque p { font-size: clamp(.72rem, 1.5vh, .86rem); line-height: 1.28; }
+    .recursos-fotos { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.6rem, 1.6vw, 1.1rem); width: 100%; flex: 1 1 0; min-height: 0; }
+    .recursos-fotos img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radio-lg); box-shadow: var(--sombra-media); border: 3px solid var(--blanco); outline: 2px solid var(--rosa-suave); display: block; }
+
+    /* Nota "por confirmar / a futuro" */
+    .nota-pendiente {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--rosa-suave); color: var(--rosa-oscuro);
+      font-size: clamp(.8rem, 1.7vh, .95rem); font-weight: 800;
+      padding: .4rem 1rem; border-radius: var(--radio-pill); margin-top: .4rem;
+    }
+
     /* Final / gracias */
     .final { text-align: center; align-items: center; }
     .final img.logo-final {
@@ -608,6 +663,31 @@
       .producto-card .nombre { font-size: .7rem; line-height: 1.15; }
       .producto-card .desc { font-size: .6rem; line-height: 1.15; margin-top: 1px; }
       .nav-puntos { max-width: 38vw; }
+
+      .qr-panel { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; width: 100%; }
+      .qr-card { width: 100%; }
+      .qr-card img { width: 100%; height: auto; max-height: clamp(100px, 20vh, 170px); }
+      .qr-card span { font-size: clamp(.7rem, 1.7vh, .88rem); line-height: 1.2; max-width: none; }
+      .servicios-qr-grid .servicio-bloque { padding: .5rem .55rem; gap: 3px; }
+      .servicios-qr-grid .servicio-bloque .icono { width: clamp(30px, 5.2vh, 40px); height: clamp(30px, 5.2vh, 40px); font-size: clamp(1rem, 2vh, 1.2rem); }
+      .servicios-qr-grid .servicio-bloque h3 { font-size: clamp(.85rem, 1.9vh, 1rem); line-height: 1.15; }
+      .servicios-qr-grid .servicio-bloque p { font-size: clamp(.68rem, 1.5vh, .8rem); line-height: 1.2; }
+      .paleta-grid { grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+      .paleta-chip .swatch { height: clamp(56px, 9vh, 90px); }
+      .paleta-chip .info { padding: .4rem .35rem; }
+      .paleta-chip .nombre { font-size: .82rem; }
+      .paleta-chip .hex { font-size: .7rem; }
+      .fuentes-row { gap: .6rem; }
+      .fuente-card { padding: .5rem .9rem; }
+      .fuente-card .muestra { font-size: 1.4rem; margin-bottom: 2px; }
+      .fuente-card .etiqueta-fuente { font-size: .7rem; }
+      .recursos-grid, .recursos-fotos { grid-template-columns: 1fr 1fr; }
+      .costos-grid { grid-template-columns: 1fr; }
+      .costo-item .desc { font-size: .78rem; }
+      .costo-item .valor { font-size: .8rem; }
+      .dos-tarjetas .tarjeta h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+      .dos-tarjetas .miembro-lista { font-size: .78rem; line-height: 1.3; gap: 4px !important; }
+      .nota-pendiente { font-size: .78rem; padding: .3rem .8rem; margin-top: .2rem; }
     }
 
     @media (max-width: 680px) and (max-height: 700px) {
@@ -647,6 +727,33 @@
       .portada .proyecto-titulo { font-size: clamp(.85rem, 2vh, 1.02rem); }
       .integrantes-pill span { font-size: .78rem; padding: 5px 12px; }
       .portada-footer { font-size: .7rem; }
+
+      .qr-panel { gap: .6rem; }
+      .qr-card img { height: clamp(100px, 26vh, 175px); }
+      .qr-card span { font-size: .78rem; max-width: 8rem; }
+      .paleta-grid { gap: .4rem; }
+      .paleta-chip .swatch { height: 44px; }
+      .paleta-chip .info { padding: .3rem .3rem; }
+      .paleta-chip .nombre { font-size: .76rem; }
+      .paleta-chip .hex { font-size: .64rem; margin-top: 1px; }
+      .fuentes-row { gap: .5rem; }
+      .fuente-card { padding: .45rem .8rem; }
+      .fuente-card .muestra { font-size: 1.15rem; margin-bottom: 1px; }
+      .fuente-card .etiqueta-fuente { font-size: .66rem; }
+      .costos-grid { gap: 0 .7rem; }
+      .costo-item { padding: .18rem 0; gap: .3rem; }
+      .costo-item .desc { font-size: .62rem; line-height: 1.15; }
+      .costo-item .valor { font-size: .64rem; }
+      .costos-total { padding: .4rem .7rem; }
+      .costos-total .etiqueta { font-size: .66rem; }
+      .costos-total .monto { font-size: 1.02rem; }
+      .recursos-grid { grid-template-columns: 1fr 1fr; gap: .32rem; }
+      .recursos-grid .servicio-bloque { padding: .28rem .38rem; gap: 2px; }
+      .recursos-grid .servicio-bloque .icono { width: 22px; height: 22px; font-size: .78rem; }
+      .recursos-grid .servicio-bloque h3 { font-size: .72rem; }
+      .recursos-grid .servicio-bloque p { font-size: .62rem; line-height: 1.18; }
+      .recursos-fotos { grid-template-columns: 1fr; gap: .4rem; }
+      .recursos-fotos img { min-height: 90px; }
     }
   </style>
 </head>
@@ -838,7 +945,10 @@
               <span>💻 Computador</span>
               <span>🎨 Canva</span>
               <span>🎬 CapCut</span>
-              <span>📘 Facebook</span>
+              <span>🅰️ Adobe</span>
+              <span>🤖 Claude</span>
+              <span>🐙 GitHub</span>
+              <span>🎵 TikTok</span>
               <span>📸 Instagram</span>
               <span>🌐 Internet</span>
               <span>📷 Cámara</span>
@@ -851,21 +961,33 @@
     <!-- ═══ 9. PRODUCTOS / SERVICIOS ═══ -->
     <section class="slide slide-bg-rosa" data-bg="rosa">
       <div class="slide-inner">
-        <div class="num-seccion">08 — Lo que vamos a construir</div>
+        <div class="num-seccion">08 — Qué construiremos</div>
         <h2>Descripción de <em>productos y servicios</em></h2>
-        <div class="servicio-bloque">
-          <span class="icono">🌐</span>
-          <div>
-            <h3>Sitio Web Gastronómico</h3>
-            <p>Portal interactivo para la panadería, con el menú de productos del día, la ubicación geográfica
-              y una sección de combos.</p>
+        <div class="servicios-qr-grid">
+          <div class="servicio-bloque">
+            <span class="icono">🌐</span>
+            <div>
+              <h3>Sitio Web Gastronómico</h3>
+              <p>Portal interactivo para la panadería, con el menú de productos del día, la ubicación geográfica
+                y una sección de combos.</p>
+            </div>
+          </div>
+          <div class="servicio-bloque">
+            <span class="icono">🎥</span>
+            <div>
+              <h3>Contenidos Digitales</h3>
+              <p>Videos tipo food styling (pan recién horneado) y posters promocionales para redes sociales.</p>
+            </div>
           </div>
         </div>
-        <div class="servicio-bloque">
-          <span class="icono">🎥</span>
-          <div>
-            <h3>Contenidos Digitales</h3>
-            <p>Videos tipo food styling (pan recién horneado) y posters promocionales para redes sociales.</p>
+        <div class="qr-panel">
+          <div class="qr-card">
+            <img src="img/qr-sitio-web.jpg" alt="Código QR al sitio web de la Panadería Sagrado Corazón de Jesús D&L" />
+            <span>🌐 Escanea y visita nuestro sitio web</span>
+          </div>
+          <div class="qr-card">
+            <img src="img/qr-tiktok.jpg" alt="Código QR al TikTok de la Panadería Sagrado Corazón de Jesús D&L" />
+            <span>🎵 Escanea y síguenos en TikTok</span>
           </div>
         </div>
       </div>
@@ -938,7 +1060,107 @@
       </div>
     </section>
 
-    <!-- ═══ 13. CIERRE ═══ -->
+    <!-- ═══ 13. RECURSOS ═══ -->
+    <section class="slide slide-bg-crema" data-bg="crema">
+      <div class="slide-inner">
+        <div class="num-seccion">12 — Lo que necesitamos</div>
+        <h2>Recursos</h2>
+        <div class="recursos-grid">
+          <div class="servicio-bloque"><span class="icono">📷</span><div><h3>Cámara y equipo</h3><p>Cámara, croma y trípode para fotos y videos de calidad.</p></div></div>
+          <div class="servicio-bloque"><span class="icono">📱</span><div><h3>Dispositivos</h3><p>Celulares y computadores para grabar, editar y publicar.</p></div></div>
+          <div class="servicio-bloque"><span class="icono">🌐</span><div><h3>Internet</h3><p>Conexión estable para el manejo de las redes sociales.</p></div></div>
+          <div class="servicio-bloque"><span class="icono">🎨</span><div><h3>Herramientas digitales</h3><p>Canva, CapCut y Adobe para diseño y edición de contenido.</p></div></div>
+          <div class="servicio-bloque"><span class="icono">⏳</span><div><h3>Tiempo y dedicación</h3><p>Para la producción y publicación constante de contenido.</p></div></div>
+        </div>
+        <div class="recursos-fotos">
+          <img src="../camaras/camaras-2.jpg" alt="Equipo preparando la toma de fotos con cámara y croma" />
+          <img src="../camaras/camaras-4.jpg" alt="Equipo grabando y ajustando la escena para el contenido" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 14. PALETA DE COLORES Y ESTILO ═══ -->
+    <section class="slide slide-bg-rosa" data-bg="rosa">
+      <div class="slide-inner">
+        <div class="num-seccion">13 — Nuestra identidad visual</div>
+        <h2>Paleta de <em>colores y estilo</em></h2>
+        <p class="lead" style="max-width:56rem;">Tonos rosa pastel y tierra cálida sobre fondos claros: la dulzura de la panadería artesanal, con tipografía serif elegante para los acentos.</p>
+        <div class="paleta-grid">
+          <div class="paleta-chip"><div class="swatch" style="background:#fff0f3;"></div><div class="info"><div class="nombre">Rosa pálido</div><div class="hex">#FFF0F3</div></div></div>
+          <div class="paleta-chip"><div class="swatch" style="background:#ffd6e0;"></div><div class="info"><div class="nombre">Rosa suave</div><div class="hex">#FFD6E0</div></div></div>
+          <div class="paleta-chip"><div class="swatch" style="background:#ff8fab;"></div><div class="info"><div class="nombre">Rosa fuerte</div><div class="hex">#FF8FAB</div></div></div>
+          <div class="paleta-chip"><div class="swatch" style="background:#c9465a;"></div><div class="info"><div class="nombre">Rosa oscuro</div><div class="hex">#C9465A</div></div></div>
+          <div class="paleta-chip"><div class="swatch" style="background:#fff8f0;"></div><div class="info"><div class="nombre">Crema</div><div class="hex">#FFF8F0</div></div></div>
+          <div class="paleta-chip"><div class="swatch" style="background:#c87941;"></div><div class="info"><div class="nombre">Caramelo</div><div class="hex">#C87941</div></div></div>
+        </div>
+        <div class="fuentes-row">
+          <div class="fuente-card"><div class="muestra display">Playfair Display</div><div class="etiqueta-fuente">Tipografía de títulos</div></div>
+          <div class="fuente-card"><div class="muestra cuerpo">Nunito</div><div class="etiqueta-fuente">Tipografía de texto</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 15. INFORME DE COSTOS Y GASTOS ═══ -->
+    <section class="slide slide-bg-crema" data-bg="crema">
+      <div class="slide-inner">
+        <div class="num-seccion">14 — Presupuesto del proyecto</div>
+        <h2>Informe de <em>costos y gastos</em></h2>
+        <div class="costos-grid">
+          <div class="costo-item"><span class="desc">Cámara Sony ZV-E10</span><span class="valor">$3.375.962</span></div>
+          <div class="costo-item"><span class="desc">Tarjeta SD ADATA 128GB (x2)</span><span class="valor">$211.098</span></div>
+          <div class="costo-item"><span class="desc">Trípode con cabezal fluido</span><span class="valor">$1.277.837</span></div>
+          <div class="costo-item"><span class="desc">Batería recargable de la cámara</span><span class="valor">$365.811</span></div>
+          <div class="costo-item"><span class="desc">Cargador de batería para cámara</span><span class="valor">$472.469</span></div>
+          <div class="costo-item"><span class="desc">Grabadora Tascam DR-05XP</span><span class="valor">$1.072.498</span></div>
+          <div class="costo-item"><span class="desc">Memoria para grabadora de audio</span><span class="valor">$76.923</span></div>
+          <div class="costo-item"><span class="desc">Micrófonos de solapa inalámbricos</span><span class="valor">$1.430.473</span></div>
+          <div class="costo-item"><span class="desc">Audífonos Behringer BH470</span><span class="valor">$327.012</span></div>
+          <div class="costo-item"><span class="desc">Cargador de pilas</span><span class="valor">$69.606</span></div>
+          <div class="costo-item"><span class="desc">Set de pilas recargables AA/AAA</span><span class="valor">$152.541</span></div>
+          <div class="costo-item"><span class="desc">Micrófono Boom</span><span class="valor">$1.296.443</span></div>
+          <div class="costo-item"><span class="desc">Portátil HP + licencia</span><span class="valor">$2.615.330</span></div>
+          <div class="costo-item"><span class="desc">Disco duro externo 2TB</span><span class="valor">$393.852</span></div>
+        </div>
+        <div class="costos-total">
+          <span class="etiqueta">Total invertido</span>
+          <span class="monto">$13.137.855</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 16. GANANCIAS Y PÉRDIDAS ═══ -->
+    <section class="slide slide-bg-rosa" data-bg="rosa">
+      <div class="slide-inner">
+        <div class="num-seccion">15 — Proyección a futuro</div>
+        <h2>Ganancias y <em>pérdidas</em></h2>
+        <p class="lead">
+          Más allá de este proyecto escolar, el modelo es escalable: ofrecemos portafolios digitales
+          —diseño web y gestión de creadores— a otras panificadoras y negocios locales que quieran
+          fortalecer su presencia en internet.
+        </p>
+        <div class="dos-tarjetas">
+          <div class="tarjeta">
+            <h3>💻 Diseño web</h3>
+            <ul class="miembro-lista" style="display:grid; gap:6px;">
+              <li><b>Landing page básica:</b> $300.000 – $1.000.000</li>
+              <li><b>Sitio corporativo / catálogo:</b> $1.000.000 – $3.000.000</li>
+              <li><b>Tienda en línea (e-commerce):</b> $1.500.000 – $5.000.000+</li>
+            </ul>
+          </div>
+          <div class="tarjeta">
+            <h3>🎬 Creadores e influencers</h3>
+            <ul class="miembro-lista" style="display:grid; gap:6px;">
+              <li><b>Nano (1k–10k seguidores):</b> $50.000 – $200.000 por publicación</li>
+              <li><b>Micro (10k–50k seguidores):</b> $250.000 – $800.000 por paquete</li>
+              <li><b>Macro (50k–500k+ seguidores):</b> $1.000.000 – $5.000.000+ por campaña</li>
+            </ul>
+          </div>
+        </div>
+        <span class="nota-pendiente">📋 Tarifas de referencia para futuros clientes</span>
+      </div>
+    </section>
+
+    <!-- ═══ 17. CIERRE ═══ -->
     <section class="slide slide-bg-oscuro" data-bg="oscuro">
       <div class="slide-inner final">
         <img class="logo-final" src="../img/logo.png" alt="Panadería Sagrado Corazón de Jesús D&L" />
@@ -959,7 +1181,7 @@
     <button class="nav-btn" id="btnPrev" aria-label="Diapositiva anterior">‹</button>
     <div class="nav-puntos" id="navPuntos"></div>
     <button class="nav-btn" id="btnNext" aria-label="Siguiente diapositiva">›</button>
-    <span class="nav-contador" id="navContador">1 / 13</span>
+    <span class="nav-contador" id="navContador">1 / 17</span>
   </div>
 
   <script>

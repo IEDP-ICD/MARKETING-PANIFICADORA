@@ -1,23 +1,18 @@
 [
   {
-    "titulo": "Así hacemos nuestro pan artesanal 🍞",
+    "titulo": "Pan fresco, hecho con amor 💕",
     "red": "TikTok",
     "icono": "🎵",
-    "descripcion": "Proceso completo de elaboración de nuestro pan de queso artesanal, desde los ingredientes hasta el horno.",
-    "tiktok_url": "https://www.tiktok.com/@usuario/video/PEGA_EL_ID_DEL_VIDEO_AQUI"
+    "descripcion": "Nuestros panes recién horneados, con mucho cariño para endulzar tu día. #panesconamor",
+    "tiktok_url": "https://vt.tiktok.com/ZSbBqQ9SE/",
+    "miniatura": "videos/video1-miniatura.jpg"
   },
   {
-    "titulo": "Pandebono paso a paso 💕",
+    "titulo": "Conoce Panadería D&L 🎀",
     "red": "TikTok",
     "icono": "🎵",
-    "descripcion": "Tutorial completo para hacer pandebono colombiano en casa. ¡Con todos nuestros secretos!",
-    "tiktok_url": "https://www.tiktok.com/@usuario/video/PEGA_EL_ID_DEL_VIDEO_AQUI"
-  },
-  {
-    "titulo": "Detrás de cámaras en TikTok 🎀",
-    "red": "TikTok",
-    "icono": "🎵",
-    "descripcion": "Se usa solo si TikTok no responde; si responde, se reemplaza por la descripción real del video",
-    "tiktok_url": "https://www.tiktok.com/@usuario/video/PEGA_EL_ID_DEL_VIDEO_AQUI"
+    "descripcion": "Quiénes somos y qué hacemos en Panadería Sagrado Corazón de Jesús D&L.",
+    "tiktok_url": "https://vt.tiktok.com/ZSbBqvCyV/",
+    "miniatura": "videos/video2-miniatura.jpg"
   }
 ]

@@ -770,7 +770,7 @@
     .video-tiktok-thumb {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
     }
 
@@ -1261,15 +1261,20 @@
            "titulo": "Detrás de cámaras en TikTok 🎀",
            "red": "TikTok",
            "descripcion": "Se usa solo si TikTok no responde; si responde, se reemplaza por la descripción real del video",
-           "tiktok_url": "https://www.tiktok.com/@usuario/video/CODIGO_DEL_VIDEO"
+           "tiktok_url": "https://www.tiktok.com/@usuario/video/CODIGO_DEL_VIDEO",
+           "miniatura": "videos/mi-miniatura.jpg"
          },
          ...
        ]
        El youtube_id está en la URL: youtube.com/watch?v=ESTE_CODIGO
-       El tiktok_url es la URL completa del video en TikTok. Al cargar la
-       página, el código consulta la API pública oEmbed de TikTok para
-       traer la miniatura y la descripción real del video; si TikTok no
-       responde (sin internet, video privado, etc.) se usa "descripcion".
+       El tiktok_url es la URL completa (o el enlace corto vt.tiktok.com) del
+       video en TikTok. "miniatura" es opcional: una imagen local en
+       videos/ que se usa como portada de la ficha. Si no se indica
+       miniatura, al cargar la página el código consulta la API pública
+       oEmbed de TikTok para traer la miniatura real; si TikTok no
+       responde (sin internet, video privado, etc.) se usa el ícono 🎵.
+       La descripción real del video (si TikTok responde) siempre
+       reemplaza a "descripcion", tenga o no miniatura manual.
        ═══════════════════════════════════════════════════════════ -->
   <section class="seccion seccion-crema" id="videos">
     <div class="contenedor">
@@ -1628,7 +1633,10 @@
           <div class="video-card">
             <div class="video-wrap">
               <a class="video-tiktok-link" href="${escHtml(v.tiktok_url)}" target="_blank" rel="noopener noreferrer" aria-label="Ver en TikTok: ${escHtml(v.titulo)}">
-                <div class="video-tiktok-placeholder" id="tiktok-thumb-${i}">🎵</div>
+                ${v.miniatura
+                  ? `<img class="video-tiktok-thumb" id="tiktok-thumb-${i}" src="${escHtml(v.miniatura)}" alt="${escHtml(v.titulo)}" loading="lazy" />`
+                  : `<div class="video-tiktok-placeholder" id="tiktok-thumb-${i}">🎵</div>`
+                }
                 <div class="video-play-badge"><span class="video-play-icon">▶</span></div>
               </a>
             </div>
@@ -1658,8 +1666,9 @@
         `).join('');
 
         // Fichas de TikTok: trae miniatura y descripción reales del video
+        // (si ya hay una miniatura manual en videos.json, esa se respeta y no se reemplaza)
         videos.forEach((v, i) => {
-          if (v.tiktok_url) cargarDatosTikTok(v.tiktok_url, i);
+          if (v.tiktok_url) cargarDatosTikTok(v.tiktok_url, i, !!v.miniatura);
         });
 
       } catch (err) {
@@ -1678,14 +1687,14 @@
     se queda tal cual quedó con los datos de videos.json.
     ══════════════════════════════════════════════════════════════
     */
-    async function cargarDatosTikTok(tiktokUrl, i) {
+    async function cargarDatosTikTok(tiktokUrl, i, tieneMiniaturaManual) {
       try {
         const resp = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(tiktokUrl)}`);
         if (!resp.ok) throw new Error('oEmbed de TikTok no disponible');
         const data = await resp.json();
 
         const thumbEl = document.getElementById(`tiktok-thumb-${i}`);
-        if (thumbEl && data.thumbnail_url) {
+        if (thumbEl && data.thumbnail_url && !tieneMiniaturaManual) {
           const img = document.createElement('img');
           img.className = 'video-tiktok-thumb';
           img.id = `tiktok-thumb-${i}`;

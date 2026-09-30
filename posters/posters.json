@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Pan de queso artesanal",
+    "descripcion": "Suave y esponjoso, con auténtico queso — $1.500",
+    "archivo": "poster-pan-de-queso.jpg"
+  },
+  {
+    "nombre": "Galletitas con chocolate",
+    "descripcion": "Crujientes por fuera, suaves por dentro — $200 c/u",
+    "archivo": "poster-galletitas-chocolate.jpg"
+  },
+  {
+    "nombre": "Nuestros productos artesanales",
+    "descripcion": "Pan de queso, pan tradicional, croissant relleno, hojaldres y berlinesas",
+    "archivo": "poster-productos-artesanales.jpg"
+  },
+  {
+    "nombre": "Medialunas de jamón y queso",
+    "descripcion": "Masa suave y esponjosa, rellenas de jamón y queso — $2.000",
+    "archivo": "poster-medialunas-jamon-queso.jpg"
+  }
+]

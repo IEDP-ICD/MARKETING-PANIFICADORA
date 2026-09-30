@@ -13,6 +13,9 @@
   ║  ├── galeria/                                                ║
   ║  │   ├── galeria.json         ← lista de fotos de productos ║
   ║  │   └── (fotos JPG/PNG)                                     ║
+  ║  ├── posters/                                                ║
+  ║  │   ├── posters.json         ← lista de posters promocionales║
+  ║  │   └── (imágenes JPG/PNG)                                  ║
   ║  ├── videos/                                                 ║
   ║  │   └── videos.json          ← videos de redes sociales    ║
   ║  ├── menu/                                                   ║
@@ -570,6 +573,26 @@
       opacity: 1;
     }
 
+    /* Posters promocionales — imágenes verticales completas, sin recortar */
+    #posters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .poster-thumb {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--rosa-palido);
+      position: relative;
+    }
+
+    .poster-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
     .foto-info {
       padding: 14px 16px;
     }
@@ -1117,6 +1140,7 @@
     </a>
     <ul class="nav-links">
       <li><a href="#galeria">Galería</a></li>
+      <li><a href="#posters">Posters</a></li>
       <li><a href="#menu">Carta</a></li>
       <li><a href="#videos">Videos</a></li>
       <li><a href="#camaras">Detrás de cámaras</a></li>
@@ -1202,6 +1226,37 @@
         <p>Una mirada a nuestros panes artesanales, todos hechos con amor 💕</p>
       </div>
       <div id="galeria-grid">
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+        <div class="skeleton" style="height:280px"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       POSTERS PROMOCIONALES
+       Archivo: posters/posters.json
+       Formato:
+       [
+         {
+           "nombre": "Pan de queso artesanal",
+           "descripcion": "Suave y esponjoso — $1.500",
+           "archivo": "poster-pan-de-queso.jpg"
+         },
+         ...
+       ]
+       Las imágenes deben estar en la carpeta posters/
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="seccion" id="posters">
+    <div class="contenedor">
+      <div class="seccion-header">
+        <div class="seccion-badge">🎀 Piezas publicitarias</div>
+        <h2>Posters Promocionales</h2>
+        <p>Los posters que usamos para promocionar nuestros productos en redes sociales 💗</p>
+      </div>
+      <div id="posters-grid">
         <div class="skeleton" style="height:280px"></div>
         <div class="skeleton" style="height:280px"></div>
         <div class="skeleton" style="height:280px"></div>
@@ -1420,6 +1475,7 @@
       Promise.allSettled([
         cargarEquipoYMision(),
         cargarGaleria(),
+        cargarPosters(),
         cargarMenu(),
         cargarVideos(),
         cargarCamaras(),
@@ -1522,6 +1578,42 @@
 
       } catch (err) {
         grid.innerHTML = mensajeVacio('📷', 'Sin fotos aún', 'Crea galeria/galeria.json');
+        console.warn(err.message);
+      }
+    }
+
+
+    /*
+    ══════════════════════════════════════════════════════════════
+    FUNCIÓN: cargarPosters — Lee posters/posters.json
+    ══════════════════════════════════════════════════════════════
+    */
+    async function cargarPosters() {
+      const grid = document.getElementById('posters-grid');
+      try {
+        const resp = await fetch('posters/posters.json');
+        if (!resp.ok) throw new Error('posters.json no encontrado');
+        const posters = await resp.json();
+
+        if (!posters || posters.length === 0) {
+          grid.innerHTML = mensajeVacio('🎀', 'Sin posters aún', 'Agrega posters en posters/posters.json');
+          return;
+        }
+
+        grid.innerHTML = posters.map(poster => `
+          <div class="foto-card" onclick="abrirLightbox('posters/${poster.archivo}', '${escHtml(poster.nombre)}')">
+            <div class="poster-thumb">
+              <img src="posters/${poster.archivo}" alt="${escHtml(poster.nombre)}" loading="lazy" />
+            </div>
+            <div class="foto-info">
+              <div class="foto-nombre">${escHtml(poster.nombre)}</div>
+              <div class="foto-desc">${escHtml(poster.descripcion || '')}</div>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        grid.innerHTML = mensajeVacio('🎀', 'Sin posters aún', 'Crea posters/posters.json');
         console.warn(err.message);
       }
     }
